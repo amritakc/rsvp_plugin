@@ -39,29 +39,10 @@
 	    		var users = []
 	    		var factory = {}
 
-	    		// factory.getUsers = function (callback){
-	    		// 	callback(users)
-	    		// }
-	    		// factory.logout = function (callback){
-	    		// 	console.log("logout")
-	    		// 	users = []
-	    		// 	callback()
-	    		// }
-	    		// factory.createUser = function(user){
-	    		// 	users.push(user)
-	    		// 	// console.log(user.name + " in factory")
-	    		// 	$http.post('/createuser', user).success(function(output){
-	    		// 		// console.log(output)
-	    		// 	})
-	    		// }
-	    		// factory.getAllUsers = function(callback){
-	    		// 	$http.get('/users').success(function(output){
-	    		// 		callback(output);
-	    		// 		})
-	    		// 	}
-	    		factory.getUser = function(name, callback){
-	    			// console.log(name)
-	    			$http.get('/userinfo/' + name).success(function(output){
+	    		factory.getUser = function(email, callback){
+	    			console.log(email.email)
+	    			console.log("in getuser")
+	    			$http.post('/userinfo/', email).success(function(output){
 	    				console.log(output)
 	    				callback(output);
 	    				})
@@ -71,17 +52,17 @@
 
 
 	    	myAppDB.controller('usersController', function($scope, $location, userFactory, $routeParams){
-	    		$scope.users = [];
-	    		console.log($scope.users)
-	    		
-	    		userFactory.getUsers(function(data){
-	    			$scope.users = data
-	    		})
+	    		$scope.users = [];	    		
 
 	    		$scope.findUser = function(data){
+	    			console.log($scope.newUser)
 	    			userFactory.getUser($scope.newUser);
-	    				$scope.newUser = {};
+	    				// $scope.info = data
+	    				// $scope.newUser = {};
 	    		}
+
+
+
 	    	})	
 
 	    	 		
