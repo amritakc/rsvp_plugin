@@ -39,6 +39,7 @@
 	    		var users = []
 	    		var factory = {}
 
+
 	    		factory.getUser = function(email, callback){
 	    			console.log(email.email)
 	    			console.log("in getuser")
@@ -56,7 +57,22 @@
 
 	    		$scope.findUser = function(data){
 	    			console.log($scope.newUser)
-	    			userFactory.getUser($scope.newUser);
+	    			userFactory.getUser($scope.newUser, function(data){
+	    				if(data==="Email not found"){
+	    					// console.log("error")
+	    					console.log(data)
+	    					$scope.error = data
+	    				}
+	    				else{
+	    					// console.log("found email")
+	    					console.log(data)
+	    					$scope.info = data
+	    					
+	    				}
+	    				// $scope.newUser = []
+	    				// console.log(data)
+	    			});
+	    				
 	    				// $scope.info = data
 	    				// $scope.newUser = {};
 	    		}
