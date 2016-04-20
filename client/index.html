@@ -51,6 +51,9 @@
 	    		factory.updateRSVP = function(data, callback){
 	    			console.log("in updateRSVP")
 	    			console.log(data)
+	    			$http.post('/updatersvp', data).success(function(output){
+	    				callback(output)
+	    			})
 	    		}    			
 	    		return factory;
 	    	  });
