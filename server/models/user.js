@@ -3,7 +3,7 @@ var Schema = mongoose.Schema
 
 var UserSchema = new mongoose.Schema({ 
   email: String,
-  evemts: [
+  events: [
   	{
   	event1: String,
   	event2: String,
