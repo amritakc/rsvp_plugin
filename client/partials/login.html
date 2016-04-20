@@ -12,9 +12,15 @@
 
 	<h3>{{info.email}}</h3>
 	<div ng-repeat = "e in info.events">
-		{{e.event1}}
-		{{e.event2}}
-		{{e.event3}}
+		<form class ="col-md-4">
+			<p>{{e.event1}}</p>
+				Attending?<input type="text" class="form-control" id="rsvp1" ng-model = "newUser.rsvp1">
+			<p>{{e.event2}}</p>
+				Attending?<input type="text" class="form-control" id="rsvp2" ng-model = "newUser.rsvp2">
+			<p>{{e.event3}}</p>
+				Attending?<input type="text" class="form-control" id="rsvp3" ng-model = "newUser.rsvp3">
+			<button type="submit" class="btn btn-primary" ng-Click = "updateUser()">Submit</button>
+		</form>	
 	</div>
 
 
