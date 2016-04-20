@@ -10,16 +10,21 @@
 
 	<h3>{{error}}</h3>
 
-	<h3>{{info.email}}</h3>
 	<div ng-repeat = "e in info.events">
 		<form class ="col-md-4">
-			<p>{{e.event1}}</p>
-				Attending?<input type="text" class="form-control" id="rsvp1" ng-model = "newUser.rsvp1">
-			<p>{{e.event2}}</p>
-				Attending?<input type="text" class="form-control" id="rsvp2" ng-model = "newUser.rsvp2">
-			<p>{{e.event3}}</p>
-				Attending?<input type="text" class="form-control" id="rsvp3" ng-model = "newUser.rsvp3">
-			<button type="submit" class="btn btn-primary" ng-Click = "updateUser()">Submit</button>
+			<div class="checkbox">
+				<label><input type="checkbox" id="rsvp1" ng-model = "newUser.rsvp1">{{e.event1}}</label>
+				How many?<input type="text" class="form-control" id="rsvp1" ng-model = "newUser.num1">
+			</div>
+			<div class="checkbox">
+				<label><input type="checkbox"  id="rsvp2" ng-model = "newUser.rsvp2">{{e.event2}}</label>
+				How many?<input type="text" class="form-control" id="rsvp1" ng-model = "newUser.num2">
+			</div>
+			<div class="checkbox">
+				<label><input type="checkbox" id="rsvp3" ng-model = "newUser.rsvp3">{{e.event3}}</label>
+				How many?<input type="text" class="form-control" id="rsvp1" ng-model = "newUser.num3">
+			</div>
+			<button type="submit" class="btn btn-primary" ng-Click = "updateRSVP()">Submit</button>
 		</form>	
 	</div>
 

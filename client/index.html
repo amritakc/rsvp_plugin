@@ -41,10 +41,10 @@
 
 
 	    		factory.getUser = function(email, callback){
-	    			console.log(email.email)
-	    			console.log("in getuser")
+	    			// console.log(email.email)
+	    			// console.log("in getuser")
 	    			$http.post('/userinfo/', email).success(function(output){
-	    				console.log(output)
+	    				// console.log(output)
 	    				callback(output);
 	    				})
 	    			}	    			
@@ -56,28 +56,25 @@
 	    		$scope.users = [];	    		
 
 	    		$scope.findUser = function(data){
-	    			console.log($scope.newUser)
+	    			// console.log($scope.newUser)
 	    			userFactory.getUser($scope.newUser, function(data){
 	    				if(data==="Email not found"){
 	    					// console.log("error")
-	    					console.log(data)
+	    					// console.log(data)
 	    					$scope.error = data
 	    				}
 	    				else{
 	    					// console.log("found email")
-	    					console.log(data)
+	    					// console.log(data)
 	    					$scope.info = data
 	    					
 	    				}
-	    				// $scope.newUser = []
-	    				// console.log(data)
-	    			});
-	    				
-	    				// $scope.info = data
-	    				// $scope.newUser = {};
+	    			});	    				
 	    		}
 
-
+	    		$scope.updateRSVP = function(data){
+	    			console.log($scope.newUser)
+	    		}
 
 	    	})	
 
