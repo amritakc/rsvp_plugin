@@ -23,16 +23,47 @@ module.exports = (function() {
   },
       update: function(req,res){
         console.log('in update users controller')
-        console.log(req.body)
-        User.update({email:req.body.email}, {$push: {"events.$.sangeetk": {attending:true}}},function(err,results){
+        console.log(req.body.num.sangeet)
+        if(req.body.num.wedding===undefined){
+          console.log("wedding:false")
+        }
+
+         User.findOne({email:req.body.email}, function(err,doc){
           if(err){
             console.log("Something went wrong")
           }
           else{
-            console.log("Found email!")
-            res.json(results)
+            console.log("Updating RSVP status!")
+            if(req.body.num.sangeet!=undefined){
+              doc.events.push({event:"sangeetk", count:req.body.num.sangeet})
+            }
+            if(req.body.num.sangeet!=undefined){
+              doc.events.push({event:"sangeetr", count:req.body.num.sangeet})
+            }
+            if(req.body.num.wedding!=undefined){
+              doc.events.push({event:"wedding", count:req.body.num.wedding})
+            }
+            if(req.body.num.reception!=undefined){
+              doc.events.push({event:"reception", count:req.body.num.reception})
+            }
+            if(req.body.num.kirtan!=undefined){
+              doc.events.push({event:"kirtan", count:req.body.num.kirtan})
+            }            
+            console.log(doc.events)
+            doc.save()
+            
+            res.json(doc)
           }
     })
+    //     User.update({email:req.body.email}, {$set: {"events.$.sangeetk": {count:1}}}, function(err,results){
+    //       if(err){
+    //         console.log("Something went wrong")
+    //       }
+    //       else{
+    //         console.log("Updated RSVP status!")
+    //         res.json(results)
+    //       }
+    // })
   },
  }
 })();
