@@ -61,22 +61,19 @@
 
 
 	    	myAppDB.controller('usersController', function($scope, $location, userFactory, $routeParams){
-	    		$scope.users = [];	    		
-
+	    		$scope.users = [];	 
+	    		$scope.finished = 3
 	    		$scope.findUser = function(data){
 	    			// console.log($scope.newUser)
 	    			$scope.error = '';
 	    			userFactory.getUser($scope.newUser, function(data){
 	    				if(data==="Email not found"){
-	    					// console.log("error")
-	    					// console.log(data)
 	    					$scope.error = data
 	    					$scope.newUser = {}
 	    				}
 	    				else{
-	    					// console.log("found email")
-	    					// console.log(data)
 	    					$scope.info = data
+	    					$scope.finished = false
 	    					// $scope.newUser = {}
 	    					
 	    				}
