@@ -24,7 +24,7 @@ module.exports = (function() {
       update: function(req,res){
         console.log('in update users controller')
         console.log(req.body)
-        User.findOne({email:req.body.email}, function(err,results){
+        User.update({email:req.body.email}, {$push: {"events.$.sangeetk": {attending:true}}},function(err,results){
           if(err){
             console.log("Something went wrong")
           }

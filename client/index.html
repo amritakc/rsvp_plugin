@@ -52,6 +52,7 @@
 	    			console.log("in updateRSVP")
 	    			console.log(data)
 	    			$http.post('/updatersvp', data).success(function(output){
+	    				console.log(output)
 	    				callback(output)
 	    			})
 	    		}    			
@@ -67,13 +68,13 @@
 	    			$scope.error = '';
 	    			userFactory.getUser($scope.newUser, function(data){
 	    				if(data==="Email not found"){
-	    					console.log("error")
-	    					console.log(data)
+	    					// console.log("error")
+	    					// console.log(data)
 	    					$scope.error = data
 	    				}
 	    				else{
-	    					console.log("found email")
-	    					console.log(data)
+	    					// console.log("found email")
+	    					// console.log(data)
 	    					$scope.info = data
 	    					
 	    				}
@@ -81,7 +82,7 @@
 	    		}
 
 	    		$scope.updateRSVP = function(data){
-	    			console.log($scope.newUser)
+	    			// console.log($scope.newUser)
 	    			userFactory.updateRSVP($scope.newUser, function(data){
 	    				// console.log(data)
 	    			})
