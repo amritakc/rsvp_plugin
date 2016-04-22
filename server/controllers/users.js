@@ -25,10 +25,8 @@ module.exports = (function() {
         console.log('in update users controller')
         console.log(req.body)
         User.findOne({email:req.body.email}, function(err,results){
-          if(results === null){
-            message = "Email not found"
-            console.log("email not found")
-            res.json(message)
+          if(err){
+            console.log("Something went wrong")
           }
           else{
             console.log("Found email!")
