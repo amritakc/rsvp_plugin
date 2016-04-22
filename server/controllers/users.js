@@ -24,9 +24,10 @@ module.exports = (function() {
       update: function(req,res){
         console.log('in update users controller')
         console.log(req.body.num.sangeet)
-        if(req.body.num.wedding===undefined){
-          console.log("wedding:false")
-        }
+        console.log(req.body.email)
+        // if(req.body.num.wedding===undefined){
+          // console.log("wedding:false")
+        // }
 
          User.findOne({email:req.body.email}, function(err,doc){
           if(err){
@@ -51,7 +52,6 @@ module.exports = (function() {
             }            
             console.log(doc.events)
             doc.save()
-            
             res.json(doc)
           }
     })

@@ -71,19 +71,22 @@
 	    					// console.log("error")
 	    					// console.log(data)
 	    					$scope.error = data
+	    					$scope.newUser = {}
 	    				}
 	    				else{
-	    					console.log("found email")
-	    					console.log(data)
+	    					// console.log("found email")
+	    					// console.log(data)
 	    					$scope.info = data
+	    					// $scope.newUser = {}
 	    					
 	    				}
 	    			});	    				
 	    		}
 
 	    		$scope.updateRSVP = function(data){
-	    			// console.log($scope.newUser)
+	    			console.log($scope.newUser)
 	    			userFactory.updateRSVP($scope.newUser, function(data){
+	    				$scope.finished = true
 	    				// console.log(data)
 	    			})
 	    		}

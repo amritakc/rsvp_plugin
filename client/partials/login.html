@@ -10,15 +10,18 @@
 
 	<h3>{{error}}</h3>
 
-	<form class ="col-md-4">
-		<div ng-repeat = "e in info.eventName">
-				<div class="checkbox">
-					<label><input type="checkbox" ng-model = "newUser.rsvp[e]">{{e}}</label>
-					How many?<input type="text" class="form-control" ng-model = "newUser.num[e]">
-				</div>
-		</div>
-			<button type="submit" class="btn btn-primary" ng-Click = "updateRSVP()">Submit</button>
-	</form>	
 
+		<form class ="col-md-4">
+			<div ng-repeat = "e in info.eventName">
+					<div class="checkbox">
+						<label><input type="checkbox" ng-model = "newUser.rsvp[e]">{{e}}</label>
+						How many?<input type="text" class="form-control" ng-model = "newUser.num[e]">
+					</div>
+			</div>
+				<button type="submit" class="btn btn-primary" ng-Click = "updateRSVP()">Submit</button>
+		</form>	
+	<div ng-if="finished === true">
+		<p>Thanks for submitting your RSVP!</p>
+	</div>
 
 </div>
