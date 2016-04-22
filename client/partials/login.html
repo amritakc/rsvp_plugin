@@ -15,9 +15,11 @@
 		<form class ="col-md-4">
 			<div ng-repeat = "e in info.eventName">
 					<div class="checkbox">
-						<label><input type="checkbox" ng-model = "newUser.rsvp[e]">{{e}}</label>
-						<div ng-if="newUser.rsvp[e]">
-							How many?<input type="text" class="form-control" ng-model = "newUser.num[e]">
+						<label><input type="checkbox" ng-model = "newUser.rsvp[e.e]">{{e.e}}</label>
+						<div ng-if="newUser.rsvp[e.e]">			
+							How many?<select ng-model = "newUser.num[e.e]">
+								<option ng-repeat="n in [].constructor(e.invited+1) track by $index">{{$index}}</option>
+        					</select>
 						</div>
 					</div>
 			</div>

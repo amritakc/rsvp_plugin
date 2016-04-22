@@ -24,11 +24,7 @@ module.exports = (function() {
       update: function(req,res){
         console.log('in update users controller')
         console.log(req.body.num.sangeet)
-        console.log(req.body.email)
-        // if(req.body.num.wedding===undefined){
-          // console.log("wedding:false")
-        // }
-
+        console.log(req.body)
          User.findOne({email:req.body.email}, function(err,doc){
           if(err){
             console.log("Something went wrong")
@@ -51,19 +47,21 @@ module.exports = (function() {
               doc.events.push({event:"kirtan", count:req.body.num.kirtan})
             }            
             console.log(doc.events)
+            // doc.save(function(err,results){
+            //   if(err){
+            //     console.log("need number")
+            //     console.log(err)
+            //     res.json(err)
+            //   }
+            //   else{
+            //     console.log("successfully added RSVP")
+            //     res.json(results)
+            //   }
+            // })
             doc.save()
             res.json(doc)
           }
     })
-    //     User.update({email:req.body.email}, {$set: {"events.$.sangeetk": {count:1}}}, function(err,results){
-    //       if(err){
-    //         console.log("Something went wrong")
-    //       }
-    //       else{
-    //         console.log("Updated RSVP status!")
-    //         res.json(results)
-    //       }
-    // })
   },
  }
 })();
