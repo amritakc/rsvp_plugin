@@ -15,7 +15,24 @@
 		<form class ="col-md-4">
 			<div ng-repeat = "e in info.eventName">
 					<div class="checkbox">
-						<label><input type="checkbox" ng-model = "newUser.rsvp[e.e]">{{e.e}}</label>
+						<label>
+							<input type="checkbox" ng-model = "newUser.rsvp[e.e]">
+							<div ng-if="e.e==='sangeetk'" ng-value ='sangeetk'>
+								<p>Karandeep's Sangeet</p>
+							</div>
+							<div ng-if="e.e==='sangeetr'" ng-value = 'sangeetr'>
+								<p>Rimmy's Sangeet</p>
+							</div>
+							<div ng-if="e.e==='wedding'" ng-value = 'wedding'>
+								<p>Wedding</p>
+							</div>
+							<div ng-if="e.e==='reception'" ng-value = 'reception'>
+								<p>Reception</p>
+							</div>
+							<div ng-if="e.e==='kirtan'" ng-value = 'kirtan'>
+								<p>CT Kirtan</p>
+							</div>
+						</label>
 						<div ng-if="newUser.rsvp[e.e]">			
 							How many?<select ng-model = "newUser.num[e.e]">
 								<option ng-repeat="n in [].constructor(e.invited+1) track by $index">{{$index}}</option>
@@ -23,7 +40,12 @@
 						</div>
 					</div>
 			</div>
-				<button type="submit" class="btn btn-primary" ng-Click = "updateRSVP()">Submit</button>
+
+			<input type="checkbox" ng-model = "newUser.notattending[e.e]"><p>Will not be able to attend</p>	
+			<div ng-if="newUser.notattending[e.e]">			
+				Comment:<textarea></textarea>
+			</div>		
+			<button type="submit" class="btn btn-primary" ng-Click = "updateRSVP()">Submit</button>
 		</form>	
 	</div>
 

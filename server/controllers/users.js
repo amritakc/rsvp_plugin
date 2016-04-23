@@ -6,9 +6,6 @@ module.exports = (function() {
  return {
       show: function(req,res){
         var message 
-        // console.log("in show method")
-        // console.log(req.body)
-        // console.log(req.body.email)
         User.findOne({email:req.body.email}, function(err,results){
           if(results === null){
             message = "Email not found"
@@ -31,11 +28,11 @@ module.exports = (function() {
           }
           else{
             console.log("Updating RSVP status!")
-            if(req.body.num.sangeet!=undefined){
-              doc.events.push({event:"sangeetk", count:req.body.num.sangeet})
+            if(req.body.num.sangeetk!=undefined){
+              doc.events.push({event:"sangeetk", count:req.body.num.sangeetk})
             }
-            if(req.body.num.sangeet!=undefined){
-              doc.events.push({event:"sangeetr", count:req.body.num.sangeet})
+            if(req.body.num.sangeetr!=undefined){
+              doc.events.push({event:"sangeetr", count:req.body.num.sangeetr})
             }
             if(req.body.num.wedding!=undefined){
               doc.events.push({event:"wedding", count:req.body.num.wedding})
@@ -47,17 +44,6 @@ module.exports = (function() {
               doc.events.push({event:"kirtan", count:req.body.num.kirtan})
             }            
             console.log(doc.events)
-            // doc.save(function(err,results){
-            //   if(err){
-            //     console.log("need number")
-            //     console.log(err)
-            //     res.json(err)
-            //   }
-            //   else{
-            //     console.log("successfully added RSVP")
-            //     res.json(results)
-            //   }
-            // })
             doc.save()
             res.json(doc)
           }
