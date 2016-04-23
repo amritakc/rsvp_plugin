@@ -7,6 +7,7 @@ var UserSchema = new mongoose.Schema({
   name: String,
   eventName: [{e:String, invited:{type:Number,requred:true, default:0}}],
   events: [{event:{type:String,requred:true} ,count:{type:Number,requred:true}}],
+  attending:[{will_attend:{type:Boolean, default:true},comment:String}],
 });
 
 // var UserSchema = new mongoose.Schema({ 

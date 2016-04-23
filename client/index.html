@@ -63,30 +63,37 @@
 	    	myAppDB.controller('usersController', function($scope, $location, userFactory, $routeParams){
 	    		$scope.users = [];	 
 	    		$scope.finished = 3
+
 	    		$scope.findUser = function(data){
-	    			// console.log($scope.newUser)
+	    			console.log($scope.newUser)
 	    			$scope.error = '';
-	    			userFactory.getUser($scope.newUser, function(data){
-	    				if(data==="Email not found"){
-	    					$scope.error = data
-	    					$scope.newUser = {}
-	    				}
-	    				else{
-	    					$scope.info = data	    					
-	    					$scope.finished = false
-	    					// $scope.newUser = {}
-	    					
-	    				}
-	    			});	    				
+	    				userFactory.getUser($scope.newUser, function(data){
+		    				if(data==="Email not found"){
+		    					$scope.error = data
+		    					$scope.newUser = {}
+		    				}
+		    				else{
+		    					$scope.info = data	    					
+		    					$scope.finished = false
+		    					// $scope.newUser = {}
+		    					
+		    				}
+	    				})  				
 	    		}
 
 	    		$scope.updateRSVP = function(data){
-	    			console.log($scope.newUser)
-	    			userFactory.updateRSVP($scope.newUser, function(data){
-	    				$scope.finished = true
+	    			console.log($scope.newUser.notattending)
+	    			if($scope.newUser.notattending===true){
+	    				console.log("hello")
+	    			}
+	    			else {
+	    				userFactory.updateRSVP($scope.newUser, function(data){
+	    					$scope.finished = true
 	    				// console.log(data)
+	    			
 	    			})
 	    		}
+	    	}
 
 	    	})	
 

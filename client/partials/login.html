@@ -40,10 +40,11 @@
 						</div>
 					</div>
 			</div>
-
-			<input type="checkbox" ng-model = "newUser.notattending[e.e]"><p>Will not be able to attend</p>	
+			<div class="checkbox">
+				<input type="checkbox" ng-model = "newUser.notattending"><p>Will not be able to attend</p>
+			</div>
 			<div ng-if="newUser.notattending[e.e]">			
-				Comment:<textarea></textarea>
+				Comment:<textarea></textarea> 
 			</div>		
 			<button type="submit" class="btn btn-primary" ng-Click = "updateRSVP()">Submit</button>
 		</form>	
