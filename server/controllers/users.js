@@ -19,9 +19,9 @@ module.exports = (function() {
     })
   },
       update: function(req,res){
-        console.log('in update users controller')
-        console.log(req.body.num.sangeet)
-        console.log(req.body)
+        // console.log('in update users controller')
+        // console.log(req.body.num.sangeet)
+        // console.log(req.body)
          User.findOne({email:req.body.email}, function(err,doc){
           if(err){
             console.log("Something went wrong")
@@ -47,7 +47,21 @@ module.exports = (function() {
             doc.save()
             res.json(doc)
           }
-    })
-  },
- }
+      })
+    },
+        notattending: function(req,res){
+            console.log('in not attneding')
+            console.log(req.body.email)
+            User.findOne({email:req.body.email}, function(err,doc){
+              if(req.body.comment!=undefined){
+                  doc.attending.push({will_attend:false, comment:req.body.comment})
+              } else {
+                doc.attending.push({will_attend:false})
+              }
+              doc.save()
+              res.json(doc)
+
+      })
+    },
+}
 })();

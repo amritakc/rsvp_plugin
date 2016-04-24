@@ -7,5 +7,8 @@ module.exports = function(app){
 	})	
 	app.post('/updatersvp', function(req,res){
 		users.update(req,res)
-	})	
+	})
+	app.post('/notattending', function(req,res){
+		users.notattending(req,res)
+	})		
 };

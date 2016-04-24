@@ -55,7 +55,15 @@
 	    				console.log(output)
 	    				callback(output)
 	    			})
-	    		}    			
+	    		}   
+	    		factory.notAttending = function(data, callback){
+	    			console.log("in notAttending")
+	    			console.log(data)
+	    			$http.post('/notattending', data).success(function(output){
+	    				console.log(output)
+	    				callback(output)
+	    			})
+	    		} 	    		 			
 	    		return factory;
 	    	  });
 
@@ -84,7 +92,9 @@
 	    		$scope.updateRSVP = function(data){
 	    			console.log($scope.newUser.notattending)
 	    			if($scope.newUser.notattending===true){
-	    				console.log("hello")
+	    				userFactory.notAttending($scope.newUser, function(data){
+	    					$scope.finished = true
+	    				})
 	    				//NEED TO ADD NEW ROUTE TO UPDATE BACKEND CONTROLLER (ATTENDING:FALSE)
 	    			}
 
