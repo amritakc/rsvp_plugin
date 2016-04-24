@@ -85,7 +85,9 @@
 	    			console.log($scope.newUser.notattending)
 	    			if($scope.newUser.notattending===true){
 	    				console.log("hello")
+	    				//NEED TO ADD NEW ROUTE TO UPDATE BACKEND CONTROLLER (ATTENDING:FALSE)
 	    			}
+
 	    			else {
 	    				userFactory.updateRSVP($scope.newUser, function(data){
 	    					$scope.finished = true
