@@ -19,9 +19,6 @@ module.exports = (function() {
     })
   },
       update: function(req,res){
-        // console.log('in update users controller')
-        // console.log(req.body.num.sangeet)
-        // console.log(req.body)
          User.findOne({email:req.body.email}, function(err,doc){
           if(err){
             console.log("Something went wrong")

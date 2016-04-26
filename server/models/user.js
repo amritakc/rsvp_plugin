@@ -10,10 +10,5 @@ var UserSchema = new mongoose.Schema({
   attending:[{will_attend:{type:Boolean, default:true},comment:String}],
 });
 
-// var UserSchema = new mongoose.Schema({ 
-//   email: [String],
-//   name: String,
-//   events: [{sangeetk: {event:String, attending:Boolean,count:Number}}, {sangeetr: {event:String, attending:Boolean,count:Number}}, {wedding: {event:String, attending:Boolean,count:Number}}, {reception: {event:String, attending:Boolean,count:Number}}, {kirtan: {event:String, attending:Boolean,count:Number}}],
-// });
 UserSchema.plugin(uniqueValidator);
 mongoose.model('User', UserSchema);
