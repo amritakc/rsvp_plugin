@@ -41,10 +41,7 @@
 
 
 	    		factory.getUser = function(email, callback){
-	    			// console.log(email.email)
-	    			// console.log("in getuser")
 	    			$http.post('/userinfo/', email).success(function(output){
-	    				// console.log(output)
 	    				callback(output);
 	    				})
 	    			}	
@@ -60,7 +57,6 @@
 	    			console.log("in notAttending")
 	    			console.log(data)
 	    			$http.post('/notattending', data).success(function(output){
-	    				console.log(output)
 	    				callback(output)
 	    			})
 	    		} 	    		 			
@@ -82,9 +78,7 @@
 		    				}
 		    				else{
 		    					$scope.info = data	    					
-		    					$scope.finished = false
-		    					// $scope.newUser = {}
-		    					
+		    					$scope.finished = false				
 		    				}
 	    				})  				
 	    		}
@@ -95,14 +89,11 @@
 	    				userFactory.notAttending($scope.newUser, function(data){
 	    					$scope.finished = true
 	    				})
-	    				//NEED TO ADD NEW ROUTE TO UPDATE BACKEND CONTROLLER (ATTENDING:FALSE)
 	    			}
 
 	    			else {
 	    				userFactory.updateRSVP($scope.newUser, function(data){
-	    					$scope.finished = true
-	    				// console.log(data)
-	    			
+	    					$scope.finished = true	    			
 	    			})
 	    		}
 	    	}
