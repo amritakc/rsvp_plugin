@@ -25,6 +25,7 @@ module.exports = (function() {
           }
           else{
             console.log("Updating RSVP status!")
+            console.log(req.body)
             // if(req.body.num.sangeetk!=undefined){
             //   doc.events.push({event:"sangeetk", count:req.body.num.sangeetk})
             // }
@@ -40,8 +41,8 @@ module.exports = (function() {
             // if(req.body.num.kirtan!=undefined){
             //   doc.events.push({event:"kirtan", count:req.body.num.kirtan})
             // }            
-            console.log(doc.events)
-            doc.save()
+            // console.log(doc.events)
+            // doc.save()
             res.json(doc)
           }
       })

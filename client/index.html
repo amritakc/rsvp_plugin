@@ -42,7 +42,7 @@
 
 	    		factory.getUser = function(email, callback){
 	    			$http.post('/userinfo/', email).success(function(output){
-	    				console.log(output)
+	    				// console.log(output)
 	    				callback(output);
 	    				})
 	    			}	
@@ -50,7 +50,7 @@
 	    			console.log("in updateRSVP")
 	    			console.log(data)
 	    			$http.post('/updatersvp', data).success(function(output){
-	    				console.log(output)
+	    				// console.log(output)
 	    				callback(output)
 	    			})
 	    		}       		 			
@@ -63,7 +63,7 @@
 	    		$scope.finished = 3
 
 	    		$scope.findUser = function(data){
-	    			console.log($scope.newUser)
+	    			// console.log($scope.newUser)
 	    			$scope.error = '';
 	    				userFactory.getUser($scope.newUser, function(data){
 		    				if(data==="Email not found"){
@@ -77,8 +77,9 @@
 	    				})  				
 	    		}
 
-	    		$scope.updateRSVP = function(data){
-	    			console.log($scope.newUser.notattending)
+	    		$scope.updateRSVP = function(){
+	    			// console.log(data)
+	    				console.log($scope.newUser)
 	    				userFactory.updateRSVP($scope.newUser, function(data){
 	    					$scope.finished = true	    			
 	    			})

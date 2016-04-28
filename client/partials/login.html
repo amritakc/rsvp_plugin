@@ -14,17 +14,18 @@
 	<div ng-if="finished === false">
 		<form class ="col-md-4">
 			<div ng-repeat = "event in info.events">
-					<div class="checkbox">							
+											
 							<h1>{{event.event}}</h1> 
 							<p>Number Invited: {{event.count_invited}}</p>
-							<p>Number Attending:</p><input type = "text" class = "form-control" ng-model = "rsvp.count_attending">
-        					</select>
+							<p>Number Attending:</p>
+							<input type = "text" class = "form-control" ng-model = "newUser.count_attending[event.event]">
+        		
 					
-					</div>
+				
 			</div>
-			<div>			
-				Comment:<input type = "textarea" ng-model = "rsvp.comment"></textarea> 
-			</div>		
+					
+				Comment:<input type = "text" ng-model = "newUser.comment">
+				
 			<button type="submit" class="btn btn-primary" ng-Click = "updateRSVP()">Submit</button>
 		</form>	
 	</div>
