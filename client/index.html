@@ -53,14 +53,7 @@
 	    				console.log(output)
 	    				callback(output)
 	    			})
-	    		}   
-	    		factory.notAttending = function(data, callback){
-	    			console.log("in notAttending")
-	    			console.log(data)
-	    			$http.post('/notattending', data).success(function(output){
-	    				callback(output)
-	    			})
-	    		} 	    		 			
+	    		}       		 			
 	    		return factory;
 	    	  });
 
@@ -86,18 +79,10 @@
 
 	    		$scope.updateRSVP = function(data){
 	    			console.log($scope.newUser.notattending)
-	    			if($scope.newUser.notattending===true){
-	    				userFactory.notAttending($scope.newUser, function(data){
-	    					$scope.finished = true
-	    				})
-	    			}
-
-	    			else {
 	    				userFactory.updateRSVP($scope.newUser, function(data){
 	    					$scope.finished = true	    			
 	    			})
 	    		}
-	    	}
 
 	    	})	
 

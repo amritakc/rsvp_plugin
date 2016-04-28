@@ -15,14 +15,15 @@
 		<form class ="col-md-4">
 			<div ng-repeat = "event in info.events">
 					<div class="checkbox">							
-							{{event.event}} - How many?<select ng-model = "newUser.num[event.event]">
-								<option ng-repeat="n in [].constructor(event.count_invited+1) track by $index">{{$index}}</option>
+							<h1>{{event.event}}</h1> 
+							<p>Number Invited: {{event.count_invited}}</p>
+							<p>Number Attending:</p><input type = "text" class = "form-control" ng-model = "rsvp.count_attending">
         					</select>
 					
 					</div>
 			</div>
 			<div>			
-				Comment:<textarea></textarea> 
+				Comment:<input type = "textarea" ng-model = "rsvp.comment"></textarea> 
 			</div>		
 			<button type="submit" class="btn btn-primary" ng-Click = "updateRSVP()">Submit</button>
 		</form>	

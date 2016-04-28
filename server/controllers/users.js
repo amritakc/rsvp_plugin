@@ -25,21 +25,21 @@ module.exports = (function() {
           }
           else{
             console.log("Updating RSVP status!")
-            if(req.body.num.sangeetk!=undefined){
-              doc.events.push({event:"sangeetk", count:req.body.num.sangeetk})
-            }
-            if(req.body.num.sangeetr!=undefined){
-              doc.events.push({event:"sangeetr", count:req.body.num.sangeetr})
-            }
-            if(req.body.num.wedding!=undefined){
-              doc.events.push({event:"wedding", count:req.body.num.wedding})
-            }
-            if(req.body.num.reception!=undefined){
-              doc.events.push({event:"reception", count:req.body.num.reception})
-            }
-            if(req.body.num.kirtan!=undefined){
-              doc.events.push({event:"kirtan", count:req.body.num.kirtan})
-            }            
+            // if(req.body.num.sangeetk!=undefined){
+            //   doc.events.push({event:"sangeetk", count:req.body.num.sangeetk})
+            // }
+            // if(req.body.num.sangeetr!=undefined){
+            //   doc.events.push({event:"sangeetr", count:req.body.num.sangeetr})
+            // }
+            // if(req.body.num.wedding!=undefined){
+            //   doc.events.push({event:"wedding", count:req.body.num.wedding})
+            // }
+            // if(req.body.num.reception!=undefined){
+            //   doc.events.push({event:"reception", count:req.body.num.reception})
+            // }
+            // if(req.body.num.kirtan!=undefined){
+            //   doc.events.push({event:"kirtan", count:req.body.num.kirtan})
+            // }            
             console.log(doc.events)
             doc.save()
             res.json(doc)
