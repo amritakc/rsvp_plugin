@@ -13,25 +13,11 @@
 
 	<div ng-if="finished === false">
 		<form class ="col-md-4">
-			<div ng-repeat = "e in info.eventName">
+			<div ng-repeat = "event in info.events">
 					<div class="checkbox">
 						<label>
 							<input type="checkbox" ng-model = "newUser.rsvp[e.e]">
-							<div ng-if="e.e==='sangeetk'" ng-value ='sangeetk'>
-								<p>Karandeep's Sangeet</p>
-							</div>
-							<div ng-if="e.e==='sangeetr'" ng-value = 'sangeetr'>
-								<p>Rimmy's Sangeet</p>
-							</div>
-							<div ng-if="e.e==='wedding'" ng-value = 'wedding'>
-								<p>Wedding</p>
-							</div>
-							<div ng-if="e.e==='reception'" ng-value = 'reception'>
-								<p>Reception</p>
-							</div>
-							<div ng-if="e.e==='kirtan'" ng-value = 'kirtan'>
-								<p>CT Kirtan</p>
-							</div>
+							{{event.name}}
 						</label>
 						<div ng-if="newUser.rsvp[e.e]">			
 							How many?<select ng-model = "newUser.num[e.e]">
