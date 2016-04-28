@@ -14,22 +14,14 @@
 	<div ng-if="finished === false">
 		<form class ="col-md-4">
 			<div ng-repeat = "event in info.events">
-					<div class="checkbox">
-						<label>
-							<input type="checkbox" ng-model = "newUser.rsvp[e.e]">
-							{{event.name}}
-						</label>
-						<div ng-if="newUser.rsvp[e.e]">			
-							How many?<select ng-model = "newUser.num[e.e]">
-								<option ng-repeat="n in [].constructor(e.invited+1) track by $index">{{$index}}</option>
+					<div class="checkbox">							
+							{{event.event}} - How many?<select ng-model = "newUser.num[event.event]">
+								<option ng-repeat="n in [].constructor(event.count_invited+1) track by $index">{{$index}}</option>
         					</select>
-						</div>
+					
 					</div>
 			</div>
-			<div class="checkbox">
-				<input type="checkbox" ng-model = "newUser.notattending"><p>Will not be able to attend</p>
-			</div>
-			<div ng-if="newUser.notattending">			
+			<div>			
 				Comment:<textarea></textarea> 
 			</div>		
 			<button type="submit" class="btn btn-primary" ng-Click = "updateRSVP()">Submit</button>

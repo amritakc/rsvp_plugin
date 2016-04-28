@@ -42,6 +42,7 @@
 
 	    		factory.getUser = function(email, callback){
 	    			$http.post('/userinfo/', email).success(function(output){
+	    				console.log(output)
 	    				callback(output);
 	    				})
 	    			}	
