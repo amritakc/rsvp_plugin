@@ -78,11 +78,24 @@
 	    		}
 
 	    		$scope.updateRSVP = function(){
-	    			// console.log(data)
-	    				console.log($scope.newUser)
-	    				userFactory.updateRSVP($scope.newUser, function(data){
-	    					$scope.finished = true	    			
-	    			})
+            			for(var key in $scope.newUser.count_attending){
+            				query = {'email':$scope.newUser.email,'events.event':key}
+            				data = {'events.$.count_attending': $scope.newUser.count_attending[key]}
+            				console.log(query)
+            				console.log(data)
+            				userFactory.updateRSVP({'query':query,'data':data},function(data){
+            					$scope.finished = true;
+            				})
+            			}
+            			if($scope.newUser.hasOwnProperty('comment')){
+            				query = {'email':$scope.newUser.email}
+            				userFactory.updateRSVP({'query':query,'data':{'comment':$scope.newUser.comment}},function(data){
+            					console.log(data)
+            				})
+            			}
+	    				// userFactory.updateRSVP({'query':query,'data':data}, function(data){
+	    				// 	$scope.finished = true	    			
+	    			// })
 	    		}
 
 	    	})	

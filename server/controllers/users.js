@@ -19,52 +19,19 @@ module.exports = (function() {
     })
   },
       update: function(req,res){
-         User.findOne({email:req.body.email}, function(err,doc){
-          if(err){
-            console.log("Something went wrong")
-          }
+        query = req.body.query
+        data = req.body.data
+        console.log(query)
+        console.log(data)
+        User.update(query,data,{ upsert: true},function(test,err){
+          console.log(test)
+          console.log(err)
+          if(err)
+            res.send(err)
           else{
-            // console.log("Updating RSVP status!")
-            console.log("req.body")
-            console.log(req.body)
-            console.log("doc")
-            console.log(doc)
-            for(var key in req.body.count_attending){
-              // console.log("in for loop")
-              // doc.events.key.push({count_attending:req.body.count_attending.key})
-              // console.log(doc.events)
-              for(var event in doc.events){
-                // console.log(event)
-              }
-               // for(var key in doc.events){
-               //    console.log(key, "key in inner for loop")
-               //  }
-               // console.log(doc.events,"!!doc.events[0]!!")
-               // console.log(doc.events[0].event, "!!event!!")
-               // console.log(key, "!!key!!")
-              }
-            // console.log("after for loop")
-            // console.log(doc)          
-            // console.log(doc.events[1])
-            var z = doc.events.length
-            // console.log("z: ", z)
-            for(var i = 0; i<z; i++){
-              // console.log(doc.events[i].event)
-              for(var key in req.body.count_attending){
-                // console.log(key)
-                // console.log(doc.events[i].event)
-                if(key === doc.events[i].event){
-                  console.log(doc.events[i].count_attending)
-                  console.log(req.body.key)
-
-
-                }
-              }
-            }
-            // doc.save()
-            res.json(doc)
+            res.json(test)
           }
-      })
+        })
     },
         notattending: function(req,res){
             console.log('in not attneding')
