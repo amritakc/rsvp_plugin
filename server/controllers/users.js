@@ -9,7 +9,7 @@ module.exports = (function() {
         User.findOne({email:req.body.email}, function(err,results){
           if(results === null){
             message = "Email not found"
-            console.log("email not found")
+            // console.log("email not found")
             res.json(message)
           }
           else{
@@ -24,24 +24,43 @@ module.exports = (function() {
             console.log("Something went wrong")
           }
           else{
-            console.log("Updating RSVP status!")
+            // console.log("Updating RSVP status!")
+            console.log("req.body")
             console.log(req.body)
-            // if(req.body.num.sangeetk!=undefined){
-            //   doc.events.push({event:"sangeetk", count:req.body.num.sangeetk})
-            // }
-            // if(req.body.num.sangeetr!=undefined){
-            //   doc.events.push({event:"sangeetr", count:req.body.num.sangeetr})
-            // }
-            // if(req.body.num.wedding!=undefined){
-            //   doc.events.push({event:"wedding", count:req.body.num.wedding})
-            // }
-            // if(req.body.num.reception!=undefined){
-            //   doc.events.push({event:"reception", count:req.body.num.reception})
-            // }
-            // if(req.body.num.kirtan!=undefined){
-            //   doc.events.push({event:"kirtan", count:req.body.num.kirtan})
-            // }            
-            // console.log(doc.events)
+            console.log("doc")
+            console.log(doc)
+            for(var key in req.body.count_attending){
+              // console.log("in for loop")
+              // doc.events.key.push({count_attending:req.body.count_attending.key})
+              // console.log(doc.events)
+              for(var event in doc.events){
+                // console.log(event)
+              }
+               // for(var key in doc.events){
+               //    console.log(key, "key in inner for loop")
+               //  }
+               // console.log(doc.events,"!!doc.events[0]!!")
+               // console.log(doc.events[0].event, "!!event!!")
+               // console.log(key, "!!key!!")
+              }
+            // console.log("after for loop")
+            // console.log(doc)          
+            // console.log(doc.events[1])
+            var z = doc.events.length
+            // console.log("z: ", z)
+            for(var i = 0; i<z; i++){
+              // console.log(doc.events[i].event)
+              for(var key in req.body.count_attending){
+                // console.log(key)
+                // console.log(doc.events[i].event)
+                if(key === doc.events[i].event){
+                  console.log(doc.events[i].count_attending)
+                  console.log(req.body.key)
+
+
+                }
+              }
+            }
             // doc.save()
             res.json(doc)
           }
