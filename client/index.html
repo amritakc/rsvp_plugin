@@ -3,8 +3,8 @@
 	<script src="https://code.jquery.com/jquery-1.12.3.min.js"   integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="   crossorigin="anonymous"></script>
 
 	<!-- Angular CDN -->
-   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
-   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script>
 
    <script src="https://code.jquery.com/jquery-1.12.3.min.js"   integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="   crossorigin="anonymous"></script>
 
@@ -14,41 +14,50 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="styles.css">
+	<base href="/">
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	    <script>
 
 	    	var myAppDB = angular.module('myApp', ['ngRoute']);
+
 	    	myAppDB.config(function ($routeProvider) {
 		     $routeProvider
 		        .when('/',{
+		        	controller: 'usersController',
 		            templateUrl: 'partials/login.html'
 		        })
-		         .when('/dashboard',{
-		            templateUrl: 'partials/dashboard.html'
+		         .when('data',{
+		         	controller: 'allUsersController',
+		            templateUrl: 'partials/data.html'
 		        })
-		         .when('/user/:user_name',{
-		            templateUrl: 'partials/profile.html'
-		        })
-		        .otherwise({
-		          redirectTo: '/'
-		        });
 		      });	
+
+	    	myAppDB.config(function( $locationProvider) {
+			   $locationProvider.html5Mode(true);
+
+			  })
 
 	    		myAppDB.factory('userFactory',function ($http){
 	    		var users = []
 	    		var factory = {}
 
 
+	    		factory.allUsers = function(callback){
+	    			$http.get('/users').success(function(output){
+	    				// console.log(output)
+	    				callback(output);
+	    				})
+	    			}	
 	    		factory.getUser = function(email, callback){
 	    			$http.post('/userinfo/', email).success(function(output){
+	    				console.log(output)
 	    				// console.log(output)
 	    				callback(output);
 	    				})
 	    			}	
 	    		factory.updateRSVP = function(data, callback){
-	    			console.log("in updateRSVP")
-	    			console.log(data)
 	    			$http.post('/updatersvp', data).success(function(output){
 	    				// console.log(output)
 	    				callback(output)
@@ -58,31 +67,86 @@
 	    	  });
 
 
+	    	myAppDB.controller('allUsersController',function($scope,$location,userFactory,$routeParams){
+	    		$scope.alldata = userFactory.allUsers();
+	    	})
+
 	    	myAppDB.controller('usersController', function($scope, $location, userFactory, $routeParams){
 	    		$scope.users = [];	 
 	    		$scope.finished = 3
+	    		$scope.search = true;
+	    		$scope.error = '';
 
 	    		$scope.findUser = function(data){
-	    			// console.log($scope.newUser)
+	    			console.log($scope.newUser)
+	    			if($scope.newUser == undefined ){
+	    				$scope.error = "Please provide your Name or Email Address"
+	    			}else{
+
 	    			$scope.error = '';
 	    				userFactory.getUser($scope.newUser, function(data){
-		    				if(data==="Email not found"){
+	    					console.log(data)
+		    				if(data=="Email or Name not found"){
 		    					$scope.error = data
-		    					$scope.newUser = {}
+		    					$scope.newUser ={}
 		    				}
 		    				else{
-		    					$scope.info = data	    					
-		    					$scope.finished = false				
+		    					$scope.info = data	 
+		    					$scope.newUser = {'comment':data.comment,'email':data.email}   				
+		    					$scope.finished = false;
+		    					$scope.search = false;				
 		    				}
-	    				})  				
+	    				}) 
+	    			} 				
 	    		}
 
 	    		$scope.updateRSVP = function(){
+	    			$scope.error = ''
+	    			missing_events = []
+	    			too_many_people_events = []
+	    			for(var i = 0; i < $scope.info.events.length; i++){
+	    				if($scope.newUser.hasOwnProperty('count_attending')){
+
+
+	    					if(!$scope.newUser['count_attending'].hasOwnProperty($scope.info.events[i].event)){
+	    						missing_events.push($scope.info.events[i].event)		
+	    					}
+	    					// check if the values are less than the invited values
+	    					else if($scope.newUser['count_attending'][$scope.info.events[i].event] > $scope.info.events[i].count_invited){
+	    							too_many_people_events.push($scope.info.events[i].event)
+    						}
+	    					
+	    				}else{
+	    						missing_events.push($scope.info.events[i].event)		
+	    				}
+
+	    			}
+	    			if(missing_events.length != 0){
+	    				$scope.error = "Please providing the number attending for the following events: "
+	    				for(var i = 0; i < missing_events.length; i++){
+	    					if(i+1 == missing_events.length){
+								$scope.error = $scope.error + missing_events[i]
+	    					}
+	    					else{
+		    					$scope.error = $scope.error + missing_events[i] + ', '
+	    					}
+	    				}
+	    			}
+	    			else if(too_many_people_events.length != 0){
+	    				$scope.error = "Please fix the number attending for the following events: "
+	    				for(var i = 0; i < too_many_people_events.length; i++){
+	    					if(i+1 == too_many_people_events.length){
+								$scope.error = $scope.error + too_many_people_events[i]
+	    					}
+	    					else{
+		    					$scope.error = $scope.error + too_many_people_events[i] + ', '
+	    					}
+	    				}	    			}
+	    			else{
+	    			// validate data before proceeding
             			for(var key in $scope.newUser.count_attending){
             				query = {'email':$scope.newUser.email,'events.event':key}
             				data = {'events.$.count_attending': $scope.newUser.count_attending[key]}
-            				console.log(query)
-            				console.log(data)
             				userFactory.updateRSVP({'query':query,'data':data},function(data){
             					$scope.finished = true;
             				})
@@ -90,12 +154,9 @@
             			if($scope.newUser.hasOwnProperty('comment')){
             				query = {'email':$scope.newUser.email}
             				userFactory.updateRSVP({'query':query,'data':{'comment':$scope.newUser.comment}},function(data){
-            					console.log(data)
             				})
             			}
-	    				// userFactory.updateRSVP({'query':query,'data':data}, function(data){
-	    				// 	$scope.finished = true	    			
-	    			// })
+            		}
 	    		}
 
 	    	})	
@@ -103,11 +164,12 @@
 	    	 		
 
 	    </script>
+
+
 	</head>
 	<body>
 		<div class = "container">
 			<div ng-view="">
-				<h1>Hello</h1>
         	</div>
 		</div>
 	</body>

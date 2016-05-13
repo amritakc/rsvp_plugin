@@ -1,37 +1,56 @@
-  <div ng-controller = "usersController">
-
-		<form class ="col-md-4">
-		  <div class="form-group">
-		  	Email: <input type="text" class="form-control" id="email" ng-model = "newUser.email">
-		  </div>
-		  <button type="submit" class="btn btn-primary" ng-Click = "findUser()">Submit</button>
-		</form>
-
-
-	<h3>{{error}}</h3>
-
-
-	<div ng-if="finished === false">
-		<form class ="col-md-4">
-			<div ng-repeat = "event in info.events">
-											
-							<h1>{{event.event}}</h1> 
-							<p>Number Invited: {{event.count_invited}}</p>
-							<p>Number Attending:</p>
-							<input type = "text" class = "form-control" ng-model = "newUser.count_attending[event.event]">
-        		
-					
-				
+<div ng-controller="usersController">
+	<div class="rsvp_form col-md-12">
+		<div class="col-md-12">
+			<div ng-if="error != ''" class="error">{{error}}</div>
+		</div>
+		<div class="col-md-12" ng-show="search == true">
+			<div class="col-md-12">
+				<h2>Enter your Name or Email Address</h2>
 			</div>
-					
-				Comment:<input type = "text" ng-model = "newUser.comment">
-				
-			<button type="submit" class="btn btn-primary" ng-Click = "updateRSVP()">Submit</button>
-		</form>	
-	</div>
+			<form class="col-md-4">
+			  <div class="form-group">
+			  	<label>Name</label> <input type="text" class="form-control" id="text"  ng-model = "newUser.name">
+			  	<label>Email</label> <input type="email" class="form-control" id="email"  ng-model = "newUser.email">
+			  </div>
+			  <button type="submit" class="btn btn-primary" ng-Click = "findUser()">Submit</button>
+			</form>
+		</div>
+		<div class="col-md-12">
+			<div ng-if="finished === false">
+				<div class="col-md-12">
+					<h3 ng-if="info.email != ''">Email(s): {{info.email.join(', ')}}</h3>
+					<h3 ng-if="info.name != ''">Name: {{info.name}}</h3>
+				</div>
+				<div ng-repeat="event in info.events">
+					<div class="col-md-4">
+						<h4>{{event.event}}</h4>
+						<!-- being blurbs -->
+						<div class="blurb" ng-if="event.event.indexOf('Sangeet') > -1">Friday Evening, June 24, 2016 in Los Angeles</div>
+						<div class="blurb" ng-if="event.event == 'Anand Karaj'">Saturday Morning, June 25, 2016 in Los Angeles</div>
+						<div class="blurb" ng-if="event.event == 'Reception'">Saturday Evening, June 25, 2016 in Los Angeles</div>
+						<div class="blurb" ng-if="event.event == 'Shukarana Keertan'">July 16, 2016 in Connecticut</div>
+					</div>
 
-	<div ng-if="finished === true">
-		<p>Thanks for submitting your RSVP!</p>
+					<form class ="col-md-8">		
+						<div class="col-md-4">
+							<label>Number Invited</label>
+							<input type="number"  class="form-control" value="{{event.count_invited}}"  disabled>
+						</div>
+						<div class="col-md-4">
+							<label>Number Attending</label>
+							<input type="number" class="form-control" ng-pattern="/^[0-9]{1,7}$/" ng-required="required" ng-model = "newUser.count_attending[event.event]">
+						</div>
+					</form>
+				</div>
+				<form class="col-md-10">
+					<label>Comment</label>
+					<textarea class="form-control" cols="50" rows="10" ng-model = "newUser.comment">{{info.comment}}</textarea><br>
+					<button type="submit" class="btn btn-primary" ng-Click = "updateRSVP()">Submit</button>
+				</div>
+			</div>
+			<div ng-if="finished === true">
+				<h3 class="success">Thanks for submitting your RSVP!</h3>
+			</div>
+		</div>
 	</div>
-
 </div>

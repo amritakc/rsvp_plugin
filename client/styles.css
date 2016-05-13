@@ -1,0 +1,86 @@
+
+@import url(https://fonts.googleapis.com/css?family=Satisfy|Lato|Aclonica);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:200,400,600,800);
+@import url(https://fonts.googleapis.com/css?family=Bad+Script|Euphoria+Script);
+@font-face {
+  font-family: 'RECHTMAN';
+  src: url('fonts/RECHTMAN.TTF')  format('truetype'); /* Safari, Android, iOS */
+}
+
+body{
+
+    color: #efc00e;
+    font-family: 'Open Sans';
+    background-color: #9a9db5;
+    position: relative;
+}
+
+label{
+    font-weight: normal;
+    font-size: 14px;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    color: #333;
+    letter-spacing: 1px;
+}
+
+ h3{
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+}
+.error{
+    background-color: #E74C3C;
+    color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.success{
+    background-color: #2ECC71;
+    color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.rsvp_form{
+    background-color: white;
+    padding: 20px;
+    margin: 10px;
+}
+
+.blurb{
+    font-size: 12px;
+    font-style: italic;
+    color: #333;
+}
+
+
+
+.btn {
+    padding: 14px 24px;
+    border: 0 none;
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+ 
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+ 
+.btn-primary {
+    background: #efc00e;
+    color: #ffffff;
+}
+ 
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: #efc00e;
+}
+ 
+.btn-primary:active, .btn-primary.active {
+    background: #efc00e;
+    box-shadow: none;
+}
